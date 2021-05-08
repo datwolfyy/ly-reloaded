@@ -17,8 +17,7 @@
 #include <stdlib.h>
 
 #define ARG_COUNT 7
-// things you can define:
-// GIT_VERSION_STRING
+#define GIT_VERSION_STRING "0.5.3"
 
 // global
 struct lang lang;
