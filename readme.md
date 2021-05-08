@@ -5,6 +5,9 @@ Ly is a lightweight TUI (ncurses-like) display manager for Linux and BSD.
 
 We have patched Ly to properly set XDG_SESSION_TYPE so that Plank (and other apps that check this environment variable) launch and work properly.
 
+## Download
+A package is availabie in the AUR as ``ly-plank-patched``. However, to make it work, you'll need to, after installing the package, enable the ``ly`` systemd service.
+
 ## Dependencies
  - a C99 compiler (tested with tcc and gcc)
  - a C standard library
