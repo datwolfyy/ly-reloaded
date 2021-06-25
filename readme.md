@@ -8,6 +8,8 @@ We have patched Ly with several bug fixes to make Ly adapt to more machines and 
 ## Download
 A package is availabie in the AUR as ``ly-plank-patched``. However, to make it work, you'll need to enable the ``ly`` systemd service after installing ly.
 
+If you're using any other distro you can always use the pre-built packages in the releases.
+
 ## Dependencies
  - a C99 compiler (tested with tcc and gcc)
  - a C standard library
@@ -21,6 +23,8 @@ A package is availabie in the AUR as ``ly-plank-patched``. However, to make it w
  - shutdown
 
 On Debian-based distros running `apt install build-essential libpam0g-dev libxcb-xkb-dev` as root should install all the dependencies for you.
+
+On Arch-based distros installing the AUR package (which is listed in the **Download** section) will install all the dependencies for you.
 
 ## Support
 The following desktop environments were tested with success
