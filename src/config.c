@@ -10,7 +10,7 @@
 
 // 0.6.0
 //#ifndef DEBUG
-	#define INI_LANG DATADIR "/lang/%s.ini"
+	#define INI_LANG DATADIR "/etc/ly/lang/%s.ini"
 	#define INI_CONFIG "/etc/ly/config.ini"
 /*#else
 	#define INI_LANG "../res/lang/%s.ini"
@@ -159,6 +159,7 @@ void config_load(const char *cfg_path)
 		{"animate", &config.animate, config_handle_bool},
 		{"animation", &config.animation, config_handle_u8},
 		{"asterisk", &config.asterisk, config_handle_char},
+        {"asterisk_empty", &config.asterisk_empty, config_handle_bool},
 		{"bg", &config.bg, config_handle_u8},
 		{"blank_box", &config.blank_box, config_handle_bool},
 		{"blank_password", &config.blank_password, config_handle_bool},
@@ -166,6 +167,7 @@ void config_load(const char *cfg_path)
 		{"default_input", &config.default_input, config_handle_u8},
 		{"fg", &config.fg, config_handle_u8},
 		{"hide_borders", &config.hide_borders, config_handle_bool},
+        {"hide_f1_commands", &config.hide_f1_commands, config_handle_bool},
 		{"input_len", &config.input_len, config_handle_u8},
 		{"lang", &config.lang, config_handle_str},
 		{"load", &config.load, config_handle_bool},
@@ -265,6 +267,7 @@ void config_defaults()
 	config.animate = false;
 	config.animation = 0;
 	config.asterisk = '*';
+    config.asterisk_empty = false;
 	config.bg = 0;
 	config.blank_box = true;
 	config.blank_password = false;
@@ -272,6 +275,7 @@ void config_defaults()
 	config.default_input = PASSWORD_INPUT;
 	config.fg = 9;
 	config.hide_borders = false;
+    config.hide_f1_commands = false;
 	config.input_len = 34;
 	config.lang = strdup("en");
 	config.load = true;

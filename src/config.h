@@ -63,6 +63,7 @@ struct config
 	bool animate;
 	u8 animation;
 	char asterisk;
+    bool asterisk_empty;
 	u8 bg;
 	bool blank_box;
 	bool blank_password;
@@ -70,6 +71,7 @@ struct config
 	u8 default_input;
 	u8 fg;
 	bool hide_borders;
+    bool hide_f1_commands;
 	u8 input_len;
 	char* lang;
 	bool load;

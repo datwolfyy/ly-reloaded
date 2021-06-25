@@ -26,7 +26,10 @@ struct config config;
 // args handles
 void arg_help(void* data, char** pars, const int pars_count)
 {
-	printf("RTFM\n");
+	printf("--config|-c <file> - Use a custom config file.\n");
+    printf("--help|-h - Show this message.\n");
+    printf("--version|-v - Show the installed version of Ly.\n");
+	exit(0);
 }
 
 void arg_version(void* data, char** pars, const int pars_count)
@@ -36,6 +39,7 @@ void arg_version(void* data, char** pars, const int pars_count)
 #else
 	printf("Ly version unknown\n");
 #endif
+    exit(0);
 }
 
 // low-level error messages
@@ -176,7 +180,8 @@ int main(int argc, char** argv)
 				animate(&buf);
 				draw_box(&buf);
 				draw_labels(&buf);
-				draw_f_commands();
+				if (!config.hide_f1_commands)
+                    draw_f_commands();
 				draw_lock_state(&buf);
 				position_input(&buf, &desktop, &login, &password);
 				draw_desktop(&desktop);
