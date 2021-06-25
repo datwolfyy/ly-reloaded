@@ -3,10 +3,10 @@
 
 Ly is a lightweight TUI (ncurses-like) display manager for Linux and BSD.
 
-We have patched Ly to properly set XDG_SESSION_TYPE so that Plank (and other apps that check this environment variable) launch and work properly.
+We have patched Ly with several bug fixes to make Ly adapt to more machines and have it set environment variables correctly (for example XDG_SESSION_TYPE which a few apps require to make them work).
 
 ## Download
-A package is availabie in the AUR as ``ly-plank-patched``. However, to make it work, you'll need to, after installing the package, enable the ``ly`` systemd service.
+A package is availabie in the AUR as ``ly-plank-patched``. However, to make it work, you'll need to enable the ``ly`` systemd service after installing ly.
 
 ## Dependencies
  - a C99 compiler (tested with tcc and gcc)
@@ -41,7 +41,7 @@ The following desktop environments were tested with success
  - windowmaker
 
 Ly should work with any X desktop environment, and provides
-basic wayland support (sway works very well, for example).
+basic Wayland support (sway works very well, for example).
 
 ## systemd?
 Unlike what you may have heard, Ly does not require `systemd`,
@@ -52,7 +52,7 @@ changing the source code won't be necessary :)
 ## Cloning and Compiling
 Clone the repository
 ```
-git clone https://github.com/nullgemm/ly.git
+git clone https://github.com/nullgemm/ly
 ```
 
 Go to its directory
@@ -70,12 +70,6 @@ Compile
 make
 ```
 
-Test in the configured tty (tty2 by default)
-or a terminal emulator (but desktop environments won't start)
-```
-sudo make run
-```
-
 Install Ly and the provided systemd service file
 ```
 sudo make install
@@ -84,6 +78,12 @@ sudo make install
 Enable the service
 ```
 sudo systemctl enable ly.service
+```
+
+Test in the configured tty (tty2 by default)
+or a terminal emulator (but desktop environments won't start)
+```
+sudo make run
 ```
 
 If you need to switch between ttys after Ly's start you also have to
