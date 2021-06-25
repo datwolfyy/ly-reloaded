@@ -25,6 +25,7 @@
 
 void draw_init(struct term_buf* buf)
 {
+    // 0.6.0, todo
 	buf->width = tb_width();
 	buf->height = tb_height();
 	hostname(&buf->info_line);

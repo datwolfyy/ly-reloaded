@@ -8,13 +8,14 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#ifndef DEBUG
+// 0.6.0
+//#ifndef DEBUG
 	#define INI_LANG DATADIR "/lang/%s.ini"
 	#define INI_CONFIG "/etc/ly/config.ini"
-#else
+/*#else
 	#define INI_LANG "../res/lang/%s.ini"
 	#define INI_CONFIG "../res/config.ini"
-#endif
+#endif*/
 
 static void lang_handle(void* data, char** pars, const int pars_count)
 {

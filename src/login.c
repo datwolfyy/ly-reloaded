@@ -209,7 +209,7 @@ void env_init(struct passwd* pwd)
 {
 	extern char** environ;
 	char* term = getenv("TERM");
-	char* lang = getenv("LANG");
+	//char* lang = getenv("LANG"); // 0.6.0
 	// clean env
 	environ[0] = NULL;
 
@@ -227,7 +227,7 @@ void env_init(struct passwd* pwd)
 	setenv("SHELL", pwd->pw_shell, 1);
 	setenv("USER", pwd->pw_name, 1);
 	setenv("LOGNAME", pwd->pw_name, 1);
-	setenv("LANG", lang, 1);
+	//setenv("LANG", lang, 1); // 0.6.0
 
 	// Set PATH if specified in the configuration
 	if (strlen(config.path))
@@ -272,6 +272,7 @@ void env_xdg(const char* tty_id)
 	setenv("XDG_SESSION_CLASS", "user", 0);
 	setenv("XDG_SEAT", "seat0", 0);
 	setenv("XDG_VTNR", tty_id, 0);
+    setenv("XDG_SESSION_ID", "1", 0); // 0.6.0
 }
 
 void add_utmp_entry(
