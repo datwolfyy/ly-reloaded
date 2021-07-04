@@ -5,7 +5,7 @@ Ly Reloaded is a maintained fork of Ly with bug fixes and patches. It's a lightw
 
 ## Download
 An older package is available in the AUR as ``ly-plank-patched`` (it is version 0.5.3, which only had the XDG_SESSION_TYPE patch).
-A newer package, which directly pulls from the latest git commits, is available in the AUR as ``ly-reloaded-git`` (thanks [ibrokemypie](https://github.com/ibrokemypie)!)
+<br/>A newer package, which directly pulls from the latest git commits, is available in the AUR as ``ly-reloaded-git`` (thanks [ibrokemypie](https://github.com/ibrokemypie)!)
 
 However, to make Ly Reloaded launch at boot, you'll need to enable the ``ly`` systemd service after installing ly.
 
