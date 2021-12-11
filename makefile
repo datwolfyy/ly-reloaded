@@ -1,7 +1,7 @@
 NAME = ly
 CC = gcc
 FLAGS = -std=c99 -pedantic -g
-FLAGS+= -Wall -Wextra -Werror=vla -Wno-unused-parameter
+FLAGS+= -Wall -Wno-unused-parameter -Wextra -Werror=vla -Werror
 #FLAGS+= -DDEBUG
 FLAGS+= -DGIT_VERSION_STRING=\"$(shell git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g')\"
 LINK = -lpam -lxcb
@@ -19,9 +19,6 @@ SRCD = src
 SUBD = sub
 RESD = res
 TESTD = tests
-
-DATADIR ?= ${DESTDIR}/etc/ly
-FLAGS+= -DDATADIR=\"$(DATADIR)\"
 
 INCL = -I$(SRCD)
 INCL+= -I$(SUBD)/ctypes
@@ -73,55 +70,29 @@ install: $(BIND)/$(NAME)
 	@echo "installing"
 	@install -dZ ${DESTDIR}/etc/ly
 	@install -DZ $(BIND)/$(NAME) -t ${DESTDIR}/usr/bin
+	@install -DZ $(RESD)/xsetup.sh -t ${DESTDIR}/etc/ly
+	@install -DZ $(RESD)/wsetup.sh -t ${DESTDIR}/etc/ly
 	@install -DZ $(RESD)/config.ini -t ${DESTDIR}/etc/ly
-	@install -DZ $(RESD)/xsetup.sh -t $(DATADIR)
-	@install -DZ $(RESD)/wsetup.sh -t $(DATADIR)
-	@install -dZ $(DATADIR)/lang
-	@install -DZ $(RESD)/lang/* -t $(DATADIR)/lang
-	@install -DZ $(RESD)/ly.service -m 644 -t ${DESTDIR}/usr/lib/systemd/system
-	@install -DZ $(RESD)/pam.d/ly -m 644 -t ${DESTDIR}/etc/pam.d
-
-installnoconf: $(BIND)/$(NAME)
-	@echo "installing without the configuration file"
-	@install -dZ ${DESTDIR}/etc/ly
-	@install -DZ $(BIND)/$(NAME) -t ${DESTDIR}/usr/bin
-	@install -DZ $(RESD)/xsetup.sh -t $(DATADIR)
-	@install -DZ $(RESD)/wsetup.sh -t $(DATADIR)
-	@install -dZ $(DATADIR)/lang
-	@install -DZ $(RESD)/lang/* -t $(DATADIR)/lang
-	@install -DZ $(RESD)/ly.service -m 644 -t ${DESTDIR}/usr/lib/systemd/system
-	@install -DZ $(RESD)/pam.d/ly -m 644 -t ${DESTDIR}/etc/pam.d
+	@install -dZ ${DESTDIR}/etc/ly/lang
+	@install -DZ $(RESD)/lang/* -t ${DESTDIR}/etc/ly/lang
+	@install -dZ ${DESTDIR}/etc/sv/ly-runit-service
+	@install -DZ $(RESD)/ly-runit-service/* -t ${DESTDIR}/etc/sv/ly-runit-service
 
 uninstall:
 	@echo "uninstalling"
 	@rm -rf ${DESTDIR}/etc/ly
-	@rm -rf $(DATADIR)
 	@rm -f ${DESTDIR}/usr/bin/ly
-	@rm -f ${DESTDIR}/usr/lib/systemd/system/ly.service
-	@rm -f ${DESTDIR}/etc/pam.d/ly
+	@rm -rf ${DESTDIR}/etc/sv/ly-runit-service
 
 clean:
 	@echo "cleaning"
 	@rm -rf $(BIND) $(OBJD) valgrind.log
 	@(cd $(SUBD)/termbox_next && $(MAKE) clean)
 
-remotes:
-	@echo "registering remotes"
-	@git remote add github git@github.com:nullgemm/$(NAME).git
-	@git remote add gitea ssh://git@git.nullgem.fr:2999/nullgemm/$(NAME).git
-
+gitea: github
 github:
-	@echo "sourcing submodules from https://github.com"
-	@cp .github .gitmodules
+	@echo "sourcing submodules"
 	@git submodule sync
 	@git submodule update --init --remote
 	@cd $(SUBD)/argoat && make github
-	@git submodule update --init --recursive --remote
-
-gitea:
-	@echo "sourcing submodules from personal server"
-	@cp .gitea .gitmodules
-	@git submodule sync
-	@git submodule update --init --remote
-	@cd $(SUBD)/argoat && make gitea
 	@git submodule update --init --recursive --remote

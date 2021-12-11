@@ -1,10 +1,10 @@
 #include "configator.h"
 #include "dragonfail.h"
-
 #include "inputs.h"
 #include "config.h"
 #include "utils.h"
 
+#include <stdint.h>
 #include <dirent.h>
 #include <limits.h>
 #include <stdio.h>

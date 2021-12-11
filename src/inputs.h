@@ -2,21 +2,21 @@
 #define H_LY_INPUTS
 
 #include "termbox.h"
-#include "ctypes.h"
 
+#include <stdint.h>
 enum display_server {DS_WAYLAND, DS_SHELL, DS_XINITRC, DS_XORG};
 
 struct text
 {
 	char* text;
 	char* end;
-	i64 len;
+	int64_t len;
 	char* cur;
 	char* visible_start;
-	u16 visible_len;
+	uint16_t visible_len;
 
-	u16 x;
-	u16 y;
+	uint16_t x;
+	uint16_t y;
 };
 
 struct desktop
@@ -25,11 +25,11 @@ struct desktop
 	char** cmd;
 	enum display_server* display_server;
 
-	u16 cur;
-	u16 len;
-	u16 visible_len;
-	u16 x;
-	u16 y;
+	uint16_t cur;
+	uint16_t len;
+	uint16_t visible_len;
+	uint16_t x;
+	uint16_t y;
 };
 
 void handle_desktop(void* input_struct, struct tb_event* event);
